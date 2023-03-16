@@ -1,4 +1,5 @@
 import ArgumentParser
+import Foundation
 
 @main
 struct SteamclEnv: ParsableCommand {
@@ -15,8 +16,43 @@ struct SteamclEnv: ParsableCommand {
 
 extension SteamclEnv {
     struct Generate: ParsableCommand {
-        func run() async {
-            print("doot")
+        func run() throws {
+            print("Searching for environment files...")
+
+            let fileManager = FileManager.default
+            guard let fileData = fileManager.contents(atPath: "\(fileManager.currentDirectoryPath)/.env"),
+                  let fileString = String(data: fileData, encoding: .utf8) else {
+                return
+            }
+
+            let lines = fileString.components(separatedBy: .newlines)
+
+            let fileHeader = """
+            enum Environment: String {
+
+            """
+
+            let fileFooter = """
+            }
+            """
+
+            var fileContents = fileHeader
+
+            for line in lines {
+                let split = line.split(separator: "=")
+                if split.count == 2 {
+                    fileContents += "    case \(split[0])=\"\(split[1])\"\n"
+                }
+            }
+
+            fileContents += fileFooter
+
+            let fileOutputPath = "\(fileManager.currentDirectoryPath)/Environment.swift"
+            try fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
         }
     }
+}
+
+enum Environment: String {
+    case API_URL = "123123"
 }
