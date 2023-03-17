@@ -1,6 +1,25 @@
 import ArgumentParser
 import Foundation
 
+enum SteamclEnvError: Error {
+    case envNotFound
+
+    var title: String {
+        switch self {
+        case .envNotFound:
+            return ""
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .envNotFound:
+            return ""
+        }
+    }
+}
+
+
 @main
 struct SteamclEnv: ParsableCommand {
     static let configuration: CommandConfiguration = {
@@ -22,7 +41,7 @@ extension SteamclEnv {
             let fileManager = FileManager.default
             guard let fileData = fileManager.contents(atPath: "\(fileManager.currentDirectoryPath)/.env"),
                   let fileString = String(data: fileData, encoding: .utf8) else {
-                return
+                throw SteamclEnvError.envNotFound
             }
 
             let lines = fileString.components(separatedBy: .newlines)

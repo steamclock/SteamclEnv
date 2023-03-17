@@ -11,6 +11,7 @@ let package = Package(
     ],
     products: [
         .executable(name: "steamclenv", targets: ["steamclenv"]),
+        .plugin(name: "InstallCLI", targets: ["Install CLI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "1.2.1")),
@@ -21,6 +22,22 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
+        ),
+        .plugin(
+            name: "Install CLI",
+            capability: .command(
+                intent: .custom(
+                    verb: "steamclenv-install",
+                    description: "Installs the SteamclEnv Command line interface."
+                ),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Creates a symbolic link to the CLI executable in your project directory.")
+                ]
+            ),
+            dependencies: [
+                "steamclenv"
+            ],
+            path: "Plugins/InstallCLI"
         ),
     ]
 )
