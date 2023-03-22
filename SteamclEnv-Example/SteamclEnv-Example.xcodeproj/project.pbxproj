@@ -11,6 +11,7 @@
 		B3948B9A29C243200044FB2B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3948B9929C243200044FB2B /* ContentView.swift */; };
 		B3948B9C29C243210044FB2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3948B9B29C243210044FB2B /* Assets.xcassets */; };
 		B3948BA029C243210044FB2B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3948B9F29C243210044FB2B /* Preview Assets.xcassets */; };
+		B3C816B529CBBB2100C4E7E3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C816B429CBBB2100C4E7E3 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		B3948B9B29C243210044FB2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3948B9D29C243210044FB2B /* SteamclEnv_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SteamclEnv_Example.entitlements; sourceTree = "<group>"; };
 		B3948B9F29C243210044FB2B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B3C816B429CBBB2100C4E7E3 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = SOURCE_ROOT; };
 		B3E0586329C2461100B3806C /* SteamclEnv */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SteamclEnv; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 		B3948B9629C243200044FB2B /* SteamclEnv-Example */ = {
 			isa = PBXGroup;
 			children = (
+				B3C816B429CBBB2100C4E7E3 /* Environment.swift */,
 				B3948B9729C243200044FB2B /* SteamclEnv_ExampleApp.swift */,
 				B3948B9929C243200044FB2B /* ContentView.swift */,
 				B3948B9B29C243210044FB2B /* Assets.xcassets */,
@@ -86,10 +89,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3948BA329C243210044FB2B /* Build configuration list for PBXNativeTarget "SteamclEnv-Example" */;
 			buildPhases = (
+				B3C816B129C4F5E500C4E7E3 /* ShellScript */,
 				B3948B9029C243200044FB2B /* Sources */,
 				B3948B9129C243200044FB2B /* Frameworks */,
 				B3948B9229C243200044FB2B /* Resources */,
-				B3C816B129C4F5E500C4E7E3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -171,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3948B9A29C243200044FB2B /* ContentView.swift in Sources */,
+				B3C816B529CBBB2100C4E7E3 /* Environment.swift in Sources */,
 				B3948B9829C243200044FB2B /* SteamclEnv_ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@ struct EnvironmentGenerator {
     let fileHeader = """
     // @generated
     //  This file was automatically generated and should not be edited.
-    enum Environment: String {
+    enum Environment {
 
     """
 
@@ -43,7 +43,7 @@ struct EnvironmentGenerator {
         var contents = fileHeader
 
         entries.forEach { key, value in
-            contents += "    case \(key)=\"\(value)\"\n"
+            contents += "    static let \(key) = \"\(value)\" \n"
         }
 
         contents += fileFooter

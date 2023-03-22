@@ -74,7 +74,3 @@ extension SteamclEnv {
         }
     }
 }
-
-enum Environment: String {
-    case API_URL = "123123"
-}
