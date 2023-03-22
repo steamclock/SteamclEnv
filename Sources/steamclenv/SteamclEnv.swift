@@ -1,20 +1,16 @@
 import ArgumentParser
 import Foundation
 
-enum SteamclEnvError: Error {
+enum SteamclEnvError: LocalizedError {
     case envNotFound
+    case parseError
 
-    var title: String {
+    var errorDescription: String {
         switch self {
         case .envNotFound:
-            return ""
-        }
-    }
-
-    var message: String {
-        switch self {
-        case .envNotFound:
-            return ""
+            return "Couldn't locate your environment file."
+        case .parseError:
+            return "Couldn't parse environment file."
         }
     }
 }
@@ -35,39 +31,46 @@ struct SteamclEnv: ParsableCommand {
 
 extension SteamclEnv {
     struct Generate: ParsableCommand {
+        @Option(
+          name: .shortAndLong,
+          help: "Path to your environment file, relative to the current directory. This overrides --dev."
+        )
+        var path: String?
+
+        @Flag(
+          name: .shortAndLong,
+          help: "Use .env.dev rather than .env."
+        )
+        var dev: Bool = false
+
+        @Flag(
+          name: .long,
+          help: "Toggle debug mode, which prints more information out to the console."
+        )
+        var debug: Bool = false
+
         func run() throws {
-            print("Searching for environment files...")
+            log("Searching for environment files...")
 
             let fileManager = FileManager.default
-            guard let fileData = fileManager.contents(atPath: "\(fileManager.currentDirectoryPath)/.env"),
+            let pathSuffix = path ?? (dev ? "/.env.dev" : ".env")
+            let fullPath = "\(fileManager.currentDirectoryPath)/\(pathSuffix)"
+            log("Looking for file at \(fullPath)")
+
+            guard let fileData = fileManager.contents(atPath: fullPath),
                   let fileString = String(data: fileData, encoding: .utf8) else {
                 throw SteamclEnvError.envNotFound
             }
 
-            let lines = fileString.components(separatedBy: .newlines)
-
-            let fileHeader = """
-            enum Environment: String {
-
-            """
-
-            let fileFooter = """
-            }
-            """
-
-            var fileContents = fileHeader
-
-            for line in lines {
-                let split = line.split(separator: "=")
-                if split.count == 2 {
-                    fileContents += "    case \(split[0])=\"\(split[1])\"\n"
-                }
-            }
-
-            fileContents += fileFooter
+            let environment = try EnvironmentGenerator(fileString, debug: debug)
 
             let fileOutputPath = "\(fileManager.currentDirectoryPath)/Environment.swift"
-            try fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
+            log("Writing to \(fileOutputPath)")
+            try environment.fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
+        }
+
+        private func log(_ message: String) {
+            if debug { print(message) }
         }
     }
 }
