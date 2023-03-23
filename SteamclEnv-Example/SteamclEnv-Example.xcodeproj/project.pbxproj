@@ -89,7 +89,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3948BA329C243210044FB2B /* Build configuration list for PBXNativeTarget "SteamclEnv-Example" */;
 			buildPhases = (
-				B3C816B129C4F5E500C4E7E3 /* ShellScript */,
+				B3C816B129C4F5E500C4E7E3 /* SteamclEnv */,
 				B3948B9029C243200044FB2B /* Sources */,
 				B3948B9129C243200044FB2B /* Frameworks */,
 				B3948B9229C243200044FB2B /* Resources */,
@@ -149,7 +149,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B3C816B129C4F5E500C4E7E3 /* ShellScript */ = {
+		B3C816B129C4F5E500C4E7E3 /* SteamclEnv */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -158,13 +158,14 @@
 			);
 			inputPaths = (
 			);
+			name = SteamclEnv;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./steamclenv\n";
+			shellScript = "./steamclenv generate --dev\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

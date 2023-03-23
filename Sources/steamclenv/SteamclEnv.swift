@@ -45,7 +45,7 @@ extension SteamclEnv {
 
         @Flag(
           name: .long,
-          help: "Toggle debug mode, which prints more information out to the console."
+          help: "Toggle debug mode, which prints more information out to the console while running."
         )
         var debug: Bool = false
 
