@@ -43,3 +43,11 @@ SteamclEnv comes with a number of flags to customize code generation:
 | --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
 | --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
 | --debug | n/a | Toggle debug mode, which prints more information out to the console while running. |
+
+### Interfacing with Bitrise
+
+< TODO >
+
+## License
+
+Netable is available under the MIT license. See [LICENSE.md](https://github.com/steamclock/steamclenv/blob/main/LICENSE.md) for more info.
