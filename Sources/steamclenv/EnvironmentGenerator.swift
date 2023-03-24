@@ -31,7 +31,7 @@ struct EnvironmentGenerator {
             if split.count == 2 {
                 let key = "\(split[0])"
                 let value = "\(split[1])"
-                if debug { print("Found key: \(key)") }
+                if debug { Logger.shared.log("Found key: \(key)") }
                 dict[key] = value
             }
         }

@@ -50,12 +50,12 @@ extension SteamclEnv {
         var debug: Bool = false
 
         func run() throws {
-            log("Searching for environment files...")
+            Logger.shared.log("Searching for environment files...")
 
             let fileManager = FileManager.default
             let pathSuffix = path ?? (dev ? "/.env.dev" : ".env")
             let fullPath = "\(fileManager.currentDirectoryPath)/\(pathSuffix)"
-            log("Looking for file at \(fullPath)")
+            Logger.shared.log("Looking for file at \(fullPath)")
 
             guard let fileData = fileManager.contents(atPath: fullPath),
                   let fileString = String(data: fileData, encoding: .utf8) else {
@@ -65,12 +65,8 @@ extension SteamclEnv {
             let environment = try EnvironmentGenerator(fileString, debug: debug)
 
             let fileOutputPath = "\(fileManager.currentDirectoryPath)/Environment.swift"
-            log("Writing to \(fileOutputPath)")
+            Logger.shared.log("Writing to \(fileOutputPath)")
             try environment.fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
-        }
-
-        private func log(_ message: String) {
-            if debug { print(message) }
         }
     }
 }
