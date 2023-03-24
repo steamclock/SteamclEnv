@@ -48,10 +48,9 @@ SteamclEnv comes with a number of flags to customize code generation:
 
 | Command | Short | Description |
 | ------ | ------ | ---------- |
-| --debug | n/a | Toggle debug mode, which prints more information out to the console while running. |
-| --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
-| --obfuscate | -o | Obfuscates environment values. See the README for more information. |
 | --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
+| --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
+| --debug | n/a | Toggle debug mode, which prints more information out to the console while running. |
 
 ### Interfacing with Bitrise
 
@@ -59,8 +58,8 @@ SteamclEnv comes with a number of flags to customize code generation:
 
 ### Obfuscation
 
-Inspired by the folks at [NSHipster](https://nshipster.com/secrets/), this options obfuscates the values written out to your `Environment.swift` file, and provides some extra output to decode those values.
+https://nshipster.com/secrets/
 
 ## License
 
-SteamclEnv is available under the MIT license. See [LICENSE.md](https://github.com/steamclock/steamclenv/blob/main/LICENSE.md) for more info.
+Netable is available under the MIT license. See [LICENSE.md](https://github.com/steamclock/steamclenv/blob/main/LICENSE.md) for more info.

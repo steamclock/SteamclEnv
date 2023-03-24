@@ -20,10 +20,10 @@ struct EnvironmentGenerator {
     """
 
     let entries: [String: String]
-    let obfuscate: Bool
+    let debug: Bool
 
-    init(_ envContents: String, obfuscate: Bool) throws {
-        self.obfuscate = obfuscate
+    init(_ envContents: String, debug: Bool) throws {
+        self.debug = debug
 
         let lines = envContents.components(separatedBy: .newlines)
         entries = lines.reduce(into: [String: String]()) { dict, line in
@@ -31,8 +31,7 @@ struct EnvironmentGenerator {
             if split.count == 2 {
                 let key = "\(split[0])"
                 let value = "\(split[1])"
-
-                Logger.shared.log("Found key: \(key)")
+                if debug { print("Found key: \(key)") }
                 dict[key] = value
             }
         }
@@ -43,23 +42,9 @@ struct EnvironmentGenerator {
     var fileContents: String {
         var contents = fileHeader
 
-        if obfuscate {
-            Logger.shared.log("Generating obfuscated Environment file...")
-            let obfuscator = ValueObfuscator()
-
-            contents += obfuscator.saltOutput
-
-            entries.forEach {
-                contents += obfuscator.obfuscated(key: $0, value: $1)
-            }
-        } else {
-            Logger.shared.log("Generating Environment file...")
-            entries.forEach { key, value in
-                contents += "    static let \(key) = \"\(value)\" \n"
-            }
+        entries.forEach { key, value in
+            contents += "    static let \(key) = \"\(value)\" \n"
         }
-
-        Logger.shared.log("Added \(entries.keys.count) entried to Environment 🚀")
 
         contents += fileFooter
 

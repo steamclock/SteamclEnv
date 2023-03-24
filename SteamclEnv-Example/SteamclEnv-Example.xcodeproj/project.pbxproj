@@ -165,7 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./steamclenv generate --obfuscate\n";
+			shellScript = "./steamclenv generate --dev\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

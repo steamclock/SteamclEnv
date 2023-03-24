@@ -31,11 +31,11 @@ struct SteamclEnv: ParsableCommand {
 
 extension SteamclEnv {
     struct Generate: ParsableCommand {
-        @Flag(
-          name: .long,
-          help: "Toggle debug mode, which prints more information out to the console while running."
+        @Option(
+          name: .shortAndLong,
+          help: "Path to your environment file, relative to the current directory. This overrides --dev."
         )
-        var debug: Bool = false
+        var path: String?
 
         @Flag(
           name: .shortAndLong,
@@ -44,36 +44,33 @@ extension SteamclEnv {
         var dev: Bool = false
 
         @Flag(
-          name: .shortAndLong,
-          help: "Obfuscates environment values. See the README for more information."
+          name: .long,
+          help: "Toggle debug mode, which prints more information out to the console while running."
         )
-        var obfuscate: Bool = false
-
-        @Option(
-          name: .shortAndLong,
-          help: "Path to your environment file, relative to the current directory. This overrides --dev."
-        )
-        var path: String?
+        var debug: Bool = false
 
         func run() throws {
-            Logger.shared.isDebug = debug
-            Logger.shared.log("Searching for environment files...")
+            log("Searching for environment files...")
 
             let fileManager = FileManager.default
             let pathSuffix = path ?? (dev ? "/.env.dev" : ".env")
             let fullPath = "\(fileManager.currentDirectoryPath)/\(pathSuffix)"
-            Logger.shared.log("Looking for file at \(fullPath)")
+            log("Looking for file at \(fullPath)")
 
             guard let fileData = fileManager.contents(atPath: fullPath),
                   let fileString = String(data: fileData, encoding: .utf8) else {
                 throw SteamclEnvError.envNotFound
             }
 
-            let environment = try EnvironmentGenerator(fileString, obfuscate: obfuscate)
+            let environment = try EnvironmentGenerator(fileString, debug: debug)
 
             let fileOutputPath = "\(fileManager.currentDirectoryPath)/Environment.swift"
-            Logger.shared.log("Writing to \(fileOutputPath)")
+            log("Writing to \(fileOutputPath)")
             try environment.fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
+        }
+
+        private func log(_ message: String) {
+            if debug { print(message) }
         }
     }
 }
