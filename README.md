@@ -18,7 +18,15 @@ The easiest way to do this is with a build script, which requires you to install
 
 To do this, right-click on your project in the Xcode file explorer, then select the Install CLI command. You'll need to grant the plugin 'write' access to you project directory for it to work.
 
-3. Create your run script
+3. Create your `.env` file(s)
+
+By default, your `.env` file should live in the same directory as your `.xcodeproject` file. 
+
+It's sometimes helpful to commit a `.env.example` file that contains all the keys found in your environment file, but not the values, to help folks who pull down your project know which keys they need to track down.
+
+Don't forget to add them to your .gitignore as well.
+
+4. Create your run script
 
 In Xcode, select your target, then Build Phases, and add a new Run Script. Drag this Run Script above the 'Compile Sources' step, and enter your run script. It should look like:
 
@@ -28,11 +36,11 @@ In Xcode, select your target, then Build Phases, and add a new Run Script. Drag 
 
 See [Usage](#usage) for a list of commands you can use to customize the generation.
 
-4. Add your generated files to your target
+5. Add your generated files to your target
 
 Build your project and make sure your run script ran. By default your new `Environment.swift` file should be output to the root project directory. Add that file to your target, and you should be good to go! 
 
-5. Make nice apps! 🚀
+6. Make nice apps! 🚀
 
 ## Usage
 
@@ -47,6 +55,10 @@ SteamclEnv comes with a number of flags to customize code generation:
 ### Interfacing with Bitrise
 
 < TODO >
+
+### Obfuscation
+
+https://nshipster.com/secrets/
 
 ## License
 
