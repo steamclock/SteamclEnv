@@ -48,9 +48,11 @@ SteamclEnv comes with a number of flags to customize code generation:
 
 | Command | Short | Description |
 | ------ | ------ | ---------- |
-| --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
-| --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
 | --debug | n/a | Toggle debug mode, which prints more information out to the console while running. |
+| --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
+| --output-path | -o | Path to output your file should write to, relative to your current directory. You can include a full or partial path. File name will default to Environment.swift if not provided. |
+| --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
+
 
 ### Interfacing with Bitrise
 
