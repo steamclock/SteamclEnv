@@ -80,7 +80,7 @@ extension SteamclEnv {
 
             echo "Writing .env file to current directory"
 
-            printf "\(contents)" >> ./.env
+            printf "\(contents)" >> ../.env
 
             echo "Wrote .env file."
 
