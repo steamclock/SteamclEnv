@@ -78,11 +78,7 @@ extension SteamclEnv {
             return """
             #!/bin/sh
 
-            echo "Writing .env file to root directory"
-
-            echo "$CI_WORKSPACE/$CI_XCODE_PROJECT/ci_scripts"
-
-            cd $CI_WORKSPACE/$CI_XCODE_PROJECT/ci_scripts || exit 1
+            echo "Writing .env file to current directory"
 
             printf "\(contents)" >> ./.env
 
