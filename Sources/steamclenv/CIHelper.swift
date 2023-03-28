@@ -82,6 +82,7 @@ extension SteamclEnv {
 
             printf "\(contents)" >> ./.env
 
+            echo "$PWD"
             echo "Wrote .env file."
 
             exit 0
