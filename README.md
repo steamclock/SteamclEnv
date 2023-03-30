@@ -24,7 +24,7 @@ By default, your `.env` file should live in the same directory as your `.xcodepr
 
 It's sometimes helpful to commit a `.env.example` file that contains all the keys found in your environment file, but not the values, to help folks who pull down your project know which keys they need to track down.
 
-Don't forget to add them to your .gitignore as well.
+Don't forget to add them (and Environment.swift) to your .gitignore as well.
 
 4. Create your run script
 
@@ -54,6 +54,7 @@ SteamclEnv comes with a number of flags to customize code generation:
 | ------ | ------ | ---------- |
 | --debug | n/a | Toggle debug mode, which prints more information out to the console while running. |
 | --dev | -d | Use .env.dev rather than .env. This is superseded by --path if provided. |
+| --obfuscate | -o | Obfuscates environment values. See the README for more information. |
 | --output-path | -o | Path to output your file should write to, relative to your current directory. You can include a full or partial path. File name will default to Environment.swift if not provided. |
 | --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
 
@@ -91,8 +92,8 @@ Called `ci-helper`, we provide utilities to generate run scripts for Bitrise, an
 
 ### Obfuscation
 
-https://nshipster.com/secrets/
+Inspired by the folks at [NSHipster](https://nshipster.com/secrets/), this options obfuscates the values written out to your `Environment.swift` file, and provides some extra output to decode those values.
 
 ## License
 
-Netable is available under the MIT license. See [LICENSE.md](https://github.com/steamclock/steamclenv/blob/main/LICENSE.md) for more info.
+SteamclEnv is available under the MIT license. See [LICENSE.md](https://github.com/steamclock/steamclenv/blob/main/LICENSE.md) for more info.

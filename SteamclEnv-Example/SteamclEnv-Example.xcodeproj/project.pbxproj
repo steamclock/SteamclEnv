@@ -165,7 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which ./steamclenv; then \n    ./steamclenv generate\nelse\n    echo \"Warning: SteamclEnv was expected to run but is not installed.\"\nfi\n";
+			shellScript = "if which ./steamclenv; then \n    ./steamclenv generate --obfuscate\nelse\n    echo \"Warning: SteamclEnv was expected to run but is not installed.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
