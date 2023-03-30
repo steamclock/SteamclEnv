@@ -34,6 +34,12 @@ extension SteamclEnv {
         )
         var path: String?
 
+        @Option(
+          name: .long,
+          help: "Don't obfuscate your environment variables, instead include them as plain text."
+        )
+        var plainText: Bool = false
+
         func run() throws {
             let defaultFileName = "Environment.swift"
             let fileManager = FileManager.default
@@ -67,7 +73,7 @@ extension SteamclEnv {
                 throw SteamclEnvError.envNotFound
             }
 
-            let environment = try EnvironmentGenerator(fileString, debug: debug)
+            let environment = try EnvironmentGenerator(fileString, obfuscate: !plainText)
 
             Logger.shared.log("Writing to \(fileOutputPath)")
             try environment.fileContents.write(toFile: fileOutputPath, atomically: true, encoding: .utf8)
