@@ -47,7 +47,7 @@ extension SteamclEnv {
           name: .shortAndLong,
           help: "Obfuscates environment values. See the README for more information."
         )
-        var obfuscate: Bool = false
+        var obfuscated: Bool = false
 
         @Option(
           name: .shortAndLong,
