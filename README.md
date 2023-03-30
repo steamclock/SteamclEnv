@@ -77,7 +77,7 @@ Called `ci-helper`, we provide utilities to generate run scripts for Bitrise, an
 
 3. Add a new Script step to your workflow, and copy the contents of the outputted `bitrise.sh` into that script.
 
-4. Trigger a new build
+4. Trigger a new build and your Environment.swift file should be generated as the script runs.
 
 #### Xcode Cloud
 
