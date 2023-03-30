@@ -31,7 +31,11 @@ Don't forget to add them to your .gitignore as well.
 In Xcode, select your target, then Build Phases, and add a new Run Script. Drag this Run Script above the 'Compile Sources' step, and enter your run script. It should look like:
 
 ```
-./steamclenv generate
+if which ./steamclenv; then 
+    ./steamclenv generate
+else
+    echo "Warning: SteamclEnv was expected to run but is not installed."
+fi
 ```
 
 See [Usage](#usage) for a list of commands you can use to customize the generation.
@@ -54,9 +58,36 @@ SteamclEnv comes with a number of flags to customize code generation:
 | --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
 
 
-### Interfacing with Bitrise
+### Interfacing with CI
 
-< TODO >
+Included with SteamclEnv is a command to help generate run scripts for generating your environment variables in CI. 
+
+Called `ci-helper`, we provide utilities to generate run scripts for Bitrise, and Xcode Cloud. The following commands are available:
+
+| Command | Short | Description |
+| --example-path | -e | Full path to your example environment file, including file name, if you don't want to use the default. Relative to the current directory. |
+| --environment-keys | n/a | A list of your environment variable keys, separated by commas. You can use this rather than passing in a .env.example file if desired. | 
+| --output-path | -o | Full path you'd like to output your finished environment file to, including filename. |
+
+#### Bitrise
+
+1. In the workflow editor, add your environment variables to the project, being sure to match the variable keys that are in your `.env` file.
+
+2. Use the `ci-helper bitrise` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Environment.swift`
+
+3. Add a new Script step to your workflow, and copy the contents of the outputted `bitrise.sh` into that script.
+
+4. Trigger a new build and your Environment.swift file should be generated as the script runs.
+
+#### Xcode Cloud
+
+1. Add your environment variables to your workflow in App Store Connect, being sure to match the variable keys that are in your `.env` file.
+
+2. Use the `ci-helper xcode` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Environment.swift`
+
+3. Copy the resulting `ci_pre_xcodebuild.sh` file into your `ci_scripts` folder. Note this folder should be at the root directory of your project to ensure it is run. You may need to use `chmod +x ./ci_pre_xcodebuild.sh` to ensure your script runs.
+
+4. Commit and push your changes with the new run script. Start a new build and your Environment.swift file should be generated as the script runs.
 
 ### Obfuscation
 
