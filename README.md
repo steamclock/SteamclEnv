@@ -20,9 +20,11 @@ To do this, right-click on your project in the Xcode file explorer, then select 
 
 ### 3. Create your `.env` file(s)
 
-By default, your `.env` file should live in the same directory as your `.xcodeproject` file. 
+By default, your `.env` file should live in the same directory as your `.xcodeproject` file. Your environment variables should use an `=` sign, with no leading or trailing spaces to seperate keys and values and include one pair per line.
 
-It's sometimes helpful to commit a `.env.example` file that contains all the keys found in your environment file, but not the values, to help folks who pull down your project know which keys they need to track down.
+You can see an example of each of these files in the [example project](https://github.com/steamclock/SteamclEnv/tree/main/SteamclEnv-Example).
+
+It's sometimes helpful to commit a `.env.example` file that contains all the keys found in your environment file, but not the values, to help folks who pull down your project know which keys they need to track down. Doing so will make setting up your CI scripts easier as well.
 
 Don't forget to add them (and Environment.swift) to your .gitignore as well.
 
