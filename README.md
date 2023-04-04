@@ -20,7 +20,10 @@ To do this, right-click on your project in the Xcode file explorer, then select 
 
 ### 3. Create your `.env` file(s)
 
-By default, your `.env` file should live in the same directory as your `.xcodeproject` file. Your environment variables should use an `=` sign, with no leading or trailing spaces to seperate keys and values and include one pair per line.
+By default, your `.env` file should live in the same directory as your `.xcodeproject` file. Your environment variables should use an `=` sign, with no leading or trailing spaces to seperate keys and values and include one pair per line. Like so:
+```
+KEY=VALUE
+```
 
 You can see an example of each of these files in the [example project](https://github.com/steamclock/SteamclEnv/tree/main/SteamclEnv-Example).
 
@@ -94,7 +97,7 @@ Called `ci-helper`, we provide utilities to generate run scripts for Bitrise, an
 
 ### Obfuscation
 
-Inspired by the folks at [NSHipster](https://nshipster.com/secrets/), this options obfuscates the values written out to your `Environment.swift` file, and provides some extra output to decode those values.
+Inspired by the folks at [NSHipster](https://nshipster.com/secrets/), by default the values generated in your `Environment.swift` file are obfuscated. You can pass in the `--plain-text` command to turn this off if desired.
 
 ## License
 
