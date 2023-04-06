@@ -8,34 +8,35 @@
 import Foundation
 
 struct EnvironmentGenerator {
-    let fileHeader = """
+    private let fileHeader = """
     // @generated
     //  This file was automatically generated and should not be edited.
     enum Environment {
 
     """
 
-    let fileFooter = """
+    private let fileFooter = """
     }
     """
 
-    let entries: [String: String]
-    let obfuscate: Bool
+    private let entries: [String: String]
+    private let obfuscate: Bool
 
     init(_ envContents: String, obfuscate: Bool) throws {
         self.obfuscate = obfuscate
 
         let lines = envContents.components(separatedBy: .newlines)
-        entries = lines.reduce(into: [String: String]()) { dict, line in
+        entries = try lines.reduce(into: [String: String]()) { dict, line in
             let split = line.split(separator: "=")
-            if split.count == 2 {
-                let key = "\(split[0])"
-                let value = "\(split[1])"
 
-                Logger.shared.log("Found key: \(key)")
+            guard split.count == 2 else { throw SteamclEnvError.parseError }
 
-                dict[key] = value
-            }
+            let key = "\(split[0])"
+            let value = "\(split[1])"
+
+            Logger.shared.log("Found key: \(key)")
+
+            dict[key] = value
         }
 
         if entries.isEmpty { throw SteamclEnvError.parseError }
@@ -60,7 +61,7 @@ struct EnvironmentGenerator {
             }
         }
 
-        Logger.shared.log("Added \(entries.keys.count) entried to Environment 🚀")
+        Logger.shared.log("Added \(entries.keys.count) entries to Environment 🚀")
 
         contents += fileFooter
 

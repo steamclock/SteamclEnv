@@ -12,11 +12,11 @@ enum SteamclEnvError: LocalizedError {
         case .envNotFound:
             return "Couldn't locate your environment file."
         case .invalidOutputDirectory:
-            return "Invalid output directory - does iut exist?"
+            return "Invalid output directory - does it exist?"
         case .parseError:
             return "Couldn't parse environment file."
         case .missingKeys:
-            return "No API keys provided, check your provided path"
+            return "No environment variables found, check your provided path."
         }
     }
 }

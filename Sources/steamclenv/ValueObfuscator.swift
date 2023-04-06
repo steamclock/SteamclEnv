@@ -32,6 +32,7 @@ struct ValueObfuscator {
                   }, as: UTF8.self
               )
             }\n
+        
         """
     }
 
