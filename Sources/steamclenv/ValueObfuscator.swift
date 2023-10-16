@@ -27,12 +27,12 @@ struct ValueObfuscator {
             private static let salt: [UInt8] = \(salt)
 
             private static func decode(_ encoded: [UInt8]) -> String {
-              String(decoding: encoded.enumerated().map { (offset, element) in
-                      element ^ salt[offset % salt.count]
-                  }, as: UTF8.self
+              String(
+                  decoding: encoded.enumerated().map { offset, element in element ^ salt[offset % salt.count] },
+                  as: UTF8.self
               )
             }\n
-        
+
         """
     }
 
