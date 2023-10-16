@@ -10,12 +10,15 @@ import Foundation
 struct EnvironmentGenerator {
     private let fileHeader = """
     // @generated
-    //  This file was automatically generated and should not be edited.
+    // This file was automatically generated and should not be edited.
+    // swiftlint:disable all
+
     enum Environment {
 
     """
 
     private let fileFooter = """
+    // swiftlint:enable all    
     }
     """
 
