@@ -46,7 +46,7 @@ extension SteamclEnv {
             var fileOutputPath = "\(fileManager.currentDirectoryPath)/\(defaultFileName)"
 
             if let outputPath = outputPath as? NSString {
-                var directory = outputPath.pathExtension.isEmpty ?
+                let directory = outputPath.pathExtension.isEmpty ?
                     outputPath.deletingPathExtension :
                     outputPath.deletingLastPathComponent
 
