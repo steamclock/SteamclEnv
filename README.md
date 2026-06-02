@@ -11,7 +11,7 @@ A library to make handling environment variables in Swift a little bit Nicer.
 
 # Usage
 
-SteamclEnv is a small CLI tool that contains two main commands: `generate` to generate your `Environment.swift` file, usually via a build script when developing locally, and `ci-helper` to reproduce the same behaviour with various CI tools. See [interfacing with CI](#interfacing-with-ci) below for more info on the latter.
+SteamclEnv is a small CLI tool that contains two main commands: `generate` to generate your `Env.swift` file, usually via a build script when developing locally, and `ci-helper` to reproduce the same behaviour with various CI tools. See [interfacing with CI](#interfacing-with-ci) below for more info on the latter.
 
 ## Using `generate`
 
@@ -21,7 +21,7 @@ After [installation](#installation), you can call `steamclenv generate` and have
 | ------ | ------ | ---------- |
 | --debug | n/a | Toggle debug mode, which prints more information out to the console while running the script. |
 | --dev | -d | Use `.env.dev` rather than `.env`. This is superseded by --path if provided. |
-| --output-path | -o | Path your output file should write to, relative to your current directory. You can include a full or partial path. File name will default to Environment.swift if not provided. |
+| --output-path | -o | Path your output file should write to, relative to your current directory. You can include a full or partial path. File name will default to Env.swift if not provided. |
 | --path | -p | Path to your environment file, relative to the current directory. This overrides --dev. |
 | --plain-text | n/a | Turns off variable obfuscation. See [obfuscation](#obfuscation) for more information. |
 
@@ -33,7 +33,7 @@ You can pass in the `--plain-text` command to turn this off if desired. While th
 
 # Interfacing with CI
 
-SteamclEnv includes a `ci-helper` command that generates shell scripts to produce your Environment.swift in CI. We current support run scripts for Bitrise and Xcode Cloud.
+SteamclEnv includes a `ci-helper` command that generates shell scripts to produce your Env.swift in CI. We current support run scripts for Bitrise and Xcode Cloud.
 
 The following additional commands are available:
 
@@ -47,25 +47,25 @@ The following additional commands are available:
 
 1. In the Bitrise workflow editor, add your environment variables to the project, being sure to match the variable keys that are in your `.env` file.
 
-2. Use the `ci-helper bitrise` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Environment.swift` as well.
+2. Use the `ci-helper bitrise` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Env.swift` as well.
 
 3. Add a new Script step to your workflow between your `Git Clone Repository` and `xcodebuild` steps, and copy the contents of the outputted `bitrise.sh` into that script.
 
-4. Trigger a new build and your `Environment.swift` file should be generated as the script runs.
+4. Trigger a new build and your `Env.swift` file should be generated as the script runs.
 
 ## Xcode Cloud
 
 1. Add your environment variables to your workflow in App Store Connect, being sure to match the variable keys that are in your `.env` file.
 
-2. Use the `ci-helper xcode` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Environment.swift` as well.
+2. Use the `ci-helper xcode` command to generate your script, providing your environment keys using a `.env.example` file or passing them in with the `environmentKeys` option. Make sure you provide an `--output-path` if using a non-standard location for `Env.swift` as well.
 
 3. Copy the resulting `ci_pre_xcodebuild.sh` file into your `ci_scripts` folder. Note this folder should be at the root directory of your project to ensure it is run. You may need to use `chmod +x ./ci_pre_xcodebuild.sh` to ensure your script runs. See the [Apple documentation](https://developer.apple.com/documentation/xcode/writing-custom-build-scripts) for more info.
 
-4. Commit and push your changes with the new run script. Start a new build and your `Environment.swift` file should be generated as the script runs.
+4. Commit and push your changes with the new run script. Start a new build and your `Env.swift` file should be generated as the script runs.
 
 # Installation
 
-SteamclEnv uses a build script to generate your `Environment.swift` file at build time, so set up is a little more involved than your usual package...
+SteamclEnv uses a build script to generate your `Env.swift` file at build time, so set up is a little more involved than your usual package...
 
 ### 1. Install SteamclEnv through the [Swift Package Manager](https://swift.org/package-manager/).
     a. In Xcode, click *File*, then *Add Package Dependencies*
@@ -85,11 +85,11 @@ You can see an example of each of these files in the [example project](https://g
 
 It's sometimes helpful to commit a `.env.example` file that contains all the keys found in your environment file, but not the values, to help folks who pull down your project know which keys they need to track down. Doing so will make setting up your CI scripts easier as well.
 
-Don't forget to add your `.env` files (and `Environment.swift`) to your `.gitignore` as well.
+Don't forget to add your `.env` files (and `Env.swift`) to your `.gitignore` as well.
     
 ### 3. Setup and run code generation
 
-SteamclEnv generates your `Environment.swift` file by parsing your `.env` file, so any time you make changes to your environment, you'll want to re-run SteamclEnv.
+SteamclEnv generates your `Env.swift` file by parsing your `.env` file, so any time you make changes to your environment, you'll want to re-run SteamclEnv.
 
 The easiest way to do this is with a build script, which requires you to install the SteamclEnv CLI. To make it easier to set up the CLI, you can run the bundled InstallCLI SPM plugin. This plugin builds the CLI and links the executable to your project.
 
@@ -117,7 +117,7 @@ Set "User Script Sandboxing" (ENABLE_USER_SCRIPT_SANDBOXING) to `NO` for your ta
 
 ### 7. Add your generated files to your target
 
-Build your project and make sure your run script ran by checking to see if a new `Environment.swift` file was created. 
+Build your project and make sure your run script ran by checking to see if a new `Env.swift` file was created. 
 By default your new file should be output to the root project directory. Add that file to your target, and you should be good to go! 
 
 ### 6. Make nice apps! 🚀

@@ -24,7 +24,7 @@ extension SteamclEnv {
 
         @Option(
           name: .shortAndLong,
-          help: "Path to output your file should write to, relative to your current directory. You can include a full or partial path. File name will default to Environment.swift if not provided."
+          help: "Path to output your file should write to, relative to your current directory. You can include a full or partial path. File name will default to Env.swift if not provided."
         )
         var outputPath: String?
 
@@ -41,7 +41,7 @@ extension SteamclEnv {
         var plainText: Bool = false
 
         func run() throws {
-            let defaultFileName = "Environment.swift"
+            let defaultFileName = "Env.swift"
             let fileManager = FileManager.default
             var fileOutputPath = "\(fileManager.currentDirectoryPath)/\(defaultFileName)"
 
@@ -56,7 +56,7 @@ extension SteamclEnv {
                 let outputExtension = outputPath.pathExtension
                 if outputExtension.isEmpty {
                     let addSlash = outputPath.pathComponents.last == "/" ? "" : "/"
-                    fileOutputPath = "\(outputPath)\(addSlash)Environment.swift"
+                    fileOutputPath = "\(outputPath)\(addSlash)Env.swift"
                 } else {
                     fileOutputPath = "\(outputPath)"
                 }
